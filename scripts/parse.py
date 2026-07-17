@@ -62,17 +62,33 @@ def parse_area_csv(text: str) -> ParseResult:
 
     # First column is usually the hour/time label (e.g. "13時" or "13:00").
     time_col = 0
+    header_width = len(header_row)
 
     latest_rate = None
     latest_label = None
     all_rates_seen = []
 
+    # IMPORTANT: these files contain multiple tables stacked in one CSV
+    # (an hourly block, then a separate 5-minute-interval block with a
+    # DIFFERENT column layout). Reusing usage_rate_col past the end of the
+    # hourly block silently reads the wrong field from the next table. So we
+    # stop as soon as we hit a blank row, a row whose width doesn't match the
+    # header, or a rate that's out of plausible bounds (0-100%) - any of
+    # which signals we've left the hourly usage-rate table.
     for row in rows[header_row_idx + 1:]:
-        if not row or len(row) <= usage_rate_col:
-            continue
+        if not row or all(c.strip() == "" for c in row):
+            break  # blank separator row between tables
+        if len(row) != header_width:
+            break  # column count changed - different table starts here
+        if len(row) <= usage_rate_col:
+            break
         rate = _to_float(row[usage_rate_col])
         if rate is None:
+            # First cell being non-numeric text (e.g. a new sub-heading) also
+            # signals we've left the table.
             continue
+        if not (0 <= rate <= 100):
+            break  # implausible for a usage rate - we've drifted into another table
         label = row[time_col].strip() if len(row) > time_col else None
         all_rates_seen.append((label, rate))
 
