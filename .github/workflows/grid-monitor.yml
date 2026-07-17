@@ -1,0 +1,58 @@
+name: Japan Grid Status Monitor
+
+on:
+  schedule:
+    # Every 30 minutes: threshold check (tier-change alerts only)
+    - cron: "0,30 * * * *"
+    # Once daily at 18:05 JST = 09:05 UTC: full digest
+    - cron: "5 9 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Mode to run"
+        required: true
+        default: "calibrate"
+        type: choice
+        options:
+          - calibrate
+          - alert
+          - digest
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Determine mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ github.event.inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "5 9 * * *" ]; then
+            echo "mode=digest" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=alert" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run monitor
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python scripts/main.py --mode ${{ steps.mode.outputs.mode }}
+
+      - name: Commit updated state (alert mode only)
+        if: steps.mode.outputs.mode == 'alert'
+        run: |
+          git config user.name "grid-monitor-bot"
+          git config user.email "actions@github.com"
+          git add state/state.json
+          git diff --quiet --cached || git commit -m "Update grid status state [skip ci]"
+          git push
