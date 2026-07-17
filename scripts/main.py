@@ -36,7 +36,8 @@ TIER_EMOJI = {"normal": "🟢", "watch": "🟡", "alert": "🔴", "unknown": "�
 
 def run_calibrate():
     """Fetch + parse every area, post a diagnostic summary. Does not touch state."""
-    lines = [f"*Grid monitor calibration check* ({dt.datetime.now(JST):%Y-%m-%d %H:%M} JST)"]
+    now_label = f"{dt.datetime.now(JST):%Y-%m-%d %H:%M} JST"
+    lines = [f"*Grid monitor calibration check* ({now_label})"]
     for area in AREAS:
         text, err = fetch_area_csv(area)
         if err:
@@ -46,10 +47,12 @@ def run_calibrate():
         if result.latest_usage_rate_pct is None:
             lines.append(f"⚠️ *{area.name_en}*: parsed but no usage rate found - {result.warning}")
         else:
+            tomorrow = (f"{result.tomorrow_peak_usage_rate_pct:.1f}%"
+                        if result.tomorrow_peak_usage_rate_pct is not None else "n/a")
+            note = f" | {result.warning}" if result.warning else ""
             lines.append(
                 f"✅ *{area.name_en}*: {result.latest_usage_rate_pct:.1f}% "
-                f"(at {result.latest_hour_label}) "
-                f"{'| ' + result.warning if result.warning else ''}"
+                f"(as of {now_label}) | tomorrow peak: {tomorrow}{note}"
             )
     post_to_slack("\n".join(lines))
 
@@ -82,7 +85,7 @@ def run_alert():
             rate_str = f"{result.latest_usage_rate_pct:.1f}%" if result.latest_usage_rate_pct else "n/a"
             post_to_slack(
                 f"{emoji} *{area.name_en}* usage rate {rate_str} "
-                f"({old_tier or 'unknown'} → {new_tier}) at {result.latest_hour_label}, {now_label}"
+                f"({old_tier or 'unknown'} → {new_tier}) as of {now_label}"
             )
 
         area_state["tier"] = new_tier
