@@ -95,8 +95,8 @@ AREAS = [
         id="shikoku",
         name_jp="四国",
         name_en="Shikoku",
-        url_template="https://www.yonden.co.jp/nw/denkiyoho/juyo_shikoku.csv",
-        date_format=None,
+        url_template="https://www.yonden.co.jp/nw/denkiyoho/juyo_08_{date}.csv",
+        date_format="%Y%m%d",
         encoding_candidates=("cp932", "utf-8-sig", "utf-8"),
     ),
     Area(
