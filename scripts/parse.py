@@ -98,15 +98,21 @@ def parse_area_csv(text: str) -> ParseResult:
         for h_idx, h_col, h_row in headers:
             if h_idx > tomorrow_marker_idx:
                 block_rates = _extract_block_rates(rows, h_idx, h_col, len(h_row))
-                if block_rates:
-                    tomorrow_peak = max(block_rates)
+                # Some areas pre-populate tomorrow's header with placeholder
+                # zeros before the real forecast is published (~18:00 JST).
+                # A genuine usage rate of exactly 0% doesn't happen, so treat
+                # 0 as "not published yet" rather than a real reading.
+                nonzero_rates = [r for r in block_rates if r > 0]
+                if nonzero_rates:
+                    tomorrow_peak = max(nonzero_rates)
                 break
 
     warning = None
     if latest_rate is None:
         warning = "Found usage-rate header but no numeric rows beneath it - check format."
-    elif tomorrow_peak is None:
-        warning = "Could not locate tomorrow's forecast block."
+    # Note: no warning for missing tomorrow_peak - most areas simply haven't
+    # published it yet (typically posts ~18:00 JST), and "n/a" already
+    # conveys that without needing an extra line.
 
     return ParseResult(
         latest_usage_rate_pct=latest_rate,
