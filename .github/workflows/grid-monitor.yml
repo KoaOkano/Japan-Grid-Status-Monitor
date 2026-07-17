@@ -2,8 +2,8 @@ name: Japan Grid Status Monitor
 
 on:
   schedule:
-    # Every 30 minutes: threshold check (tier-change alerts only)
-    - cron: "0,30 * * * *"
+    # Every 30 minutes, offset from peak scheduler times: tier-change alerts only
+    - cron: "7,37 * * * *"
     # Once daily at 18:05 JST = 09:05 UTC: full digest
     - cron: "5 9 * * *"
   workflow_dispatch:
