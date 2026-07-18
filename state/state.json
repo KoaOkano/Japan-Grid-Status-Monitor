@@ -1,53 +1,53 @@
 {
   "chubu": {
-    "last_checked": "2026-07-18 20:13 JST",
+    "last_checked": "2026-07-18 21:31 JST",
     "last_rate_pct": 83.0,
     "tier": "normal"
   },
   "chugoku": {
-    "last_checked": "2026-07-18 20:13 JST",
+    "last_checked": "2026-07-18 21:31 JST",
     "last_rate_pct": 87.0,
     "tier": "normal"
   },
   "hokkaido": {
-    "last_checked": "2026-07-18 20:13 JST",
+    "last_checked": "2026-07-18 21:31 JST",
     "last_rate_pct": 84.0,
     "tier": "normal"
   },
   "hokuriku": {
-    "last_checked": "2026-07-18 20:13 JST",
+    "last_checked": "2026-07-18 21:31 JST",
     "last_fail_notified_date": "2026-07-18",
     "last_rate_pct": 93.0,
     "tier": "watch"
   },
   "kansai": {
-    "last_checked": "2026-07-18 20:13 JST",
+    "last_checked": "2026-07-18 21:31 JST",
     "last_rate_pct": 90.0,
     "tier": "normal"
   },
   "kyushu": {
-    "last_checked": "2026-07-18 20:13 JST",
+    "last_checked": "2026-07-18 21:31 JST",
     "last_rate_pct": 88.0,
     "tier": "normal"
   },
   "okinawa": {
-    "last_checked": "2026-07-18 20:13 JST",
+    "last_checked": "2026-07-18 21:31 JST",
     "last_rate_pct": 73.0,
     "tier": "normal"
   },
   "shikoku": {
-    "last_checked": "2026-07-18 20:13 JST",
+    "last_checked": "2026-07-18 21:31 JST",
     "last_rate_pct": 84.0,
     "tier": "normal"
   },
   "tohoku": {
-    "last_checked": "2026-07-18 20:13 JST",
+    "last_checked": "2026-07-18 21:31 JST",
     "last_fail_notified_date": "2026-07-18",
     "last_rate_pct": 86.0,
     "tier": "normal"
   },
   "tokyo": {
-    "last_checked": "2026-07-18 20:13 JST",
+    "last_checked": "2026-07-18 21:31 JST",
     "last_rate_pct": 87.0,
     "tier": "normal"
   }
