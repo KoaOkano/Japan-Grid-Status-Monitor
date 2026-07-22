@@ -1,57 +1,57 @@
 {
   "chubu": {
-    "last_checked": "2026-07-22 23:17 JST",
+    "last_checked": "2026-07-23 01:04 JST",
+    "last_rate_pct": 94.0,
+    "tier": "watch"
+  },
+  "chugoku": {
+    "last_checked": "2026-07-23 01:04 JST",
+    "last_fail_notified_date": "2026-07-20",
     "last_rate_pct": 90.0,
     "tier": "normal"
   },
-  "chugoku": {
-    "last_checked": "2026-07-22 23:17 JST",
-    "last_fail_notified_date": "2026-07-20",
-    "last_rate_pct": 87.0,
+  "hokkaido": {
+    "last_checked": "2026-07-23 01:04 JST",
+    "last_rate_pct": 84.0,
     "tier": "normal"
   },
-  "hokkaido": {
-    "last_checked": "2026-07-22 23:17 JST",
-    "last_rate_pct": 95.0,
-    "tier": "watch"
-  },
   "hokuriku": {
-    "last_checked": "2026-07-22 23:17 JST",
+    "last_checked": "2026-07-23 01:04 JST",
     "last_fail_notified_date": "2026-07-20",
-    "last_rate_pct": 96.0,
+    "last_rate_pct": 93.0,
     "tier": "watch"
   },
   "kansai": {
-    "last_checked": "2026-07-22 23:17 JST",
+    "last_checked": "2026-07-23 01:04 JST",
     "last_rate_pct": 90.0,
     "tier": "normal"
   },
   "kyushu": {
-    "last_checked": "2026-07-22 23:17 JST",
+    "last_checked": "2026-07-23 01:04 JST",
     "last_fail_notified_date": "2026-07-20",
-    "last_rate_pct": 95.0,
+    "last_rate_pct": 93.0,
     "tier": "watch"
   },
   "okinawa": {
-    "last_checked": "2026-07-22 23:17 JST",
-    "last_rate_pct": 78.0,
+    "last_checked": "2026-07-23 01:04 JST",
+    "last_rate_pct": 79.0,
     "tier": "normal"
   },
   "shikoku": {
-    "last_checked": "2026-07-22 23:17 JST",
+    "last_checked": "2026-07-23 01:04 JST",
     "last_fail_notified_date": "2026-07-20",
-    "last_rate_pct": 91.0,
+    "last_rate_pct": 90.0,
     "tier": "normal"
   },
   "tohoku": {
-    "last_checked": "2026-07-22 23:17 JST",
+    "last_checked": "2026-07-23 01:04 JST",
     "last_fail_notified_date": "2026-07-20",
     "last_rate_pct": 86.0,
     "tier": "normal"
   },
   "tokyo": {
-    "last_checked": "2026-07-22 23:17 JST",
-    "last_rate_pct": 96.0,
+    "last_checked": "2026-07-23 01:04 JST",
+    "last_rate_pct": 92.0,
     "tier": "watch"
   }
 }
